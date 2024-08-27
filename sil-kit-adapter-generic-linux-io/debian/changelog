@@ -1,0 +1,5 @@
+sil-kit-adapter-generic-linux-io (0.9.1-1) UNRELEASED; urgency=low
+
+  * Initial package
+
+ -- Kyllian Aubry <kyllian.aubry@vector.com>  Thu, 08 Aug 2024 10:06:00 +0200

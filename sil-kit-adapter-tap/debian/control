@@ -1,0 +1,21 @@
+Source: sil-kit-adapter-tap
+Priority: optional
+Maintainer: Vector <support@vector.com>
+Build-Depends: debhelper-compat (= 12), cmake
+Standards-Version: 4.6.0
+Section: misc
+Homepage: https://github.com/vectorgrp/sil-kit-adapters-tap
+Vcs-Git: https://github.com/vectorgrp/sil-kit-adapters-pkg.git
+Vcs-Browser: https://github.com/vectorgrp/sil-kit-adapters-pkg
+Rules-Requires-Root: no
+
+Package: sil-kit-adapter-tap
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: libsilkit4
+Description: Attach the Vector SIL Kit to a TAP device
+ The Vector SIL Kit Adapter for TAP devices is an open-source tool which
+ provides first-class support for TAP devices of the host operating system.
+ The SIL Kit Adapter TAP source and documentation is licensed under a
+ permissible open source license, see LICENSE file. For licenses of third
+ party dependencies, see ThirdParty/LICENSES.rst.

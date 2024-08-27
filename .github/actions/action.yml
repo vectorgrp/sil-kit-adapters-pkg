@@ -1,0 +1,17 @@
+# action.yml
+description: 'Package the SIL Kit Adapter for Debian'
+outputs:
+  adapter_version:
+    description: 'The version of the packaged adapter'
+    value: ${{ steps.build_package.outputs.adapter_version }}
+  debian_revision:
+    description: 'The revision of the Debian package'
+    value: ${{ steps.build_package.outputs.debian_revision }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Build the Debian package
+      id: build_package
+      run: ./sil-kit-adapters-pkg/.github/actions/build_deb.sh
+      shell: bash

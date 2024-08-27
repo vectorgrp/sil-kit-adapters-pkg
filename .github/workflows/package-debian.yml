@@ -1,0 +1,68 @@
+on:
+  workflow_call:
+    inputs:
+      adapter_name:
+        description: 'The name of the adapter you want to package: tap, vcan, qemu, generic-linux-io.'
+        required: true
+        type: string
+      pkg_ref:
+        description: 'A commit ref of the pkg repo. Can be used to pkg a specific version on the CI pipeline.'
+        required: false
+        default: 'main'
+        type: string
+      tag_name:
+        description: 'The name of the tag which triggers the package.'
+        required: false
+        default: ''
+        type: string
+      debian_arch:
+        description: 'Ubuntu CPU arch the package should be build for.'
+        required: false
+        default: 'amd64'
+        type: string
+
+jobs:
+  build-debian-package:
+    environment: public-github-runners
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/vectorgrp/sil-kit-docker-build/sil-kit-ci-packaging-ubuntu-20.04:main
+      options: --privileged
+
+    steps:
+      - name: Checkout sil-kit-adapters-pkg repository
+        uses: actions/checkout@v3
+        with:
+            repository: vectorgrp/sil-kit-adapters-pkg
+            ref: ${{ inputs.pkg_ref }}
+            path: './sil-kit-adapters-pkg'
+
+      - name: Install packages for building
+        run: |
+          apt update
+          apt install -y g++ cmake
+        shell: bash
+
+      - name: Build
+        id: build
+        env:
+          PKG_DIR: "./sil-kit-adapters-pkg"
+          ADAPTER_NAME: ${{ inputs.adapter_name }}
+          TAG_NAME: ${{ inputs.tag_name }}
+          CI_RUN: "1"
+        uses: ./sil-kit-adapters-pkg/.github/actions
+
+      - name: Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: sil-kit-adapter-${{ inputs.adapter_name }}_${{ steps.build.outputs.adapter_version }}_${{ steps.build.outputs.debian_revision }}_${{ inputs.debian_arch }}
+          path: |
+            ./sil-kit-adapter-${{ inputs.adapter_name }}-dbgsym_${{ steps.build.outputs.adapter_version }}-${{ steps.build.outputs.debian_revision }}_${{ inputs.debian_arch }}.ddeb
+            ./sil-kit-adapter-${{ inputs.adapter_name }}_${{ steps.build.outputs.adapter_version }}-${{ steps.build.outputs.debian_revision }}_${{ inputs.debian_arch }}.deb
+            ./sil-kit-adapter-${{ inputs.adapter_name }}_${{ steps.build.outputs.adapter_version }}-${{ steps.build.outputs.debian_revision }}_${{ inputs.debian_arch }}.build
+            ./sil-kit-adapter-${{ inputs.adapter_name }}_${{ steps.build.outputs.adapter_version }}-${{ steps.build.outputs.debian_revision }}_${{ inputs.debian_arch }}.buildinfo
+            ./sil-kit-adapter-${{ inputs.adapter_name }}_${{ steps.build.outputs.adapter_version }}-${{ steps.build.outputs.debian_revision }}_${{ inputs.debian_arch }}.changes
+            ./sil-kit-adapter-${{ inputs.adapter_name }}_${{ steps.build.outputs.adapter_version }}-${{ steps.build.outputs.debian_revision }}.debian.tar.xz
+            ./sil-kit-adapter-${{ inputs.adapter_name }}_${{ steps.build.outputs.adapter_version }}-${{ steps.build.outputs.debian_revision }}.dsc
+          retention-days: 1
+          if-no-files-found: error
