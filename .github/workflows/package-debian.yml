@@ -53,7 +53,7 @@ jobs:
         uses: ./sil-kit-adapters-pkg/.github/actions
 
       - name: Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sil-kit-adapter-${{ inputs.adapter_name }}_${{ steps.build.outputs.adapter_version }}_${{ steps.build.outputs.debian_revision }}_${{ inputs.debian_arch }}
           path: |
