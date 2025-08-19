@@ -28,7 +28,6 @@ jobs:
     container:
       image: ubuntu:22.04
       options: --privileged
-
     steps:
       - name: Checkout sil-kit-adapters-pkg repository
         uses: actions/checkout@v3
@@ -39,26 +38,20 @@ jobs:
 
       - name: Install packages for building
         run: |
-          apt-get update \
-          && \
+          apt-get update && \
           apt-get install --no-install-recommends --no-install-suggests -y \
-          cmake \
-          wget \
-          && \
-          apt update \
-          && \
-          apt install -y \
-          git \
-          build-essential \
-          sudo \
-          gcc \
-          g++ \
-          debhelper \
-          dh-cmake \
-          devscripts \
-          dh-make \
-          ninja-build \
-          && \
+            cmake \
+            wget \
+            git \
+            build-essential \
+            sudo \
+            gcc \
+            g++ \
+            debhelper \
+            dh-cmake \
+            devscripts \
+            dh-make \
+            ninja-build && \
           apt-get clean
         shell: bash
 
