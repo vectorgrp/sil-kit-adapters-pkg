@@ -12,7 +12,7 @@ or by installing a SIL Kit package using the [sil-kit-pkg](https://github.com/ve
 > Currently the SIL Kit Adapter packages are only supported/tested on **amd64** architecture.
 
 ## Prerequisites
-To build a SIL Kit Adapter package, you will need to install the following packages:
+To build a SIL Kit Adapter package, you will need to install the following packages on Ubuntu-22.04 or higher:
 ```
 sudo apt install debhelper build-essential dh-cmake devscripts dh-make
 ```

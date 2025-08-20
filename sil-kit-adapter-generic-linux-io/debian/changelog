@@ -1,3 +1,13 @@
+sil-kit-adapter-generic-linux-io (1.0.0-1) stable; urgency=medium
+
+  * Initial release
+  * 3 Supported I/O Modes
+  * Analog-Digital (ADValues) Mode
+  * Character Device (CharDev) Mode
+  * GPIO Mode
+
+ -- Kyllian Aubry <kyllian.aubry@vector.com>  Wed, 20 Aug 2025 09:29:00 +0200
+
 sil-kit-adapter-generic-linux-io (0.9.1-1) UNRELEASED; urgency=low
 
   * Initial package

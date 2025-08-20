@@ -11,8 +11,7 @@ Rules-Requires-Root: no
 
 Package: sil-kit-adapter-vcan
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Recommends: libsilkit4
+Depends: libsilkit5(= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
 Description: Attach a virtual CAN interface to a Vector SIL Kit CAN bus
  The Vector SIL Kit Adapter for virtual CAN is an open-source tool which
  can attach the SIL Kit to a virtual CAN (Controller Area Network) interface

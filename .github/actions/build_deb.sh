@@ -36,7 +36,7 @@ if [ ! -z ${tag_name} ] ; then
   sed -i -E "s/(sil-kit-adapter-${adapter} \()[0-9]+\.[0-9]+\.[0-9]+(-preview[0-9]*)?(-RC[0-9]*)?/\1${tag_name}/" ${debian_path}/changelog
 fi
 
-adapter_full_version=$(sed -En "s/sil-kit-adapter-${adapter} \(([0-9]+\.[0-9]+\.[0-9]+(-preview[0-9]*)?(-RC[0-9]*)?(-[0-9]+))\).*/\1/p" ${debian_path}/changelog)
+adapter_full_version=$(sed -En "s/sil-kit-adapter-${adapter} \(([0-9]+\.[0-9]+\.[0-9]+(-preview[0-9]*)?(-RC[0-9]*)?(-[0-9]+))\).*/\1/p;q" ${debian_path}/changelog)
 adapter_version=$(echo $adapter_full_version | sed 's/-[0-9]*$//')
 debian_version=$(echo $adapter_full_version | awk -F'-' '{print $NF}')
 
