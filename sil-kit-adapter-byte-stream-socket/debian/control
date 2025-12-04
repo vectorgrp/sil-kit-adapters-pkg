@@ -1,0 +1,23 @@
+Source: sil-kit-adapter-byte-stream-socket
+Priority: optional
+Maintainer: Vector <support@vector.com>
+Build-Depends: debhelper-compat (= 12), cmake
+Standards-Version: 4.6.0
+Section: misc
+Homepage: https://github.com/vectorgrp/sil-kit-adapters-byte-stream-socket
+Vcs-Git: https://github.com/vectorgrp/sil-kit-adapters-pkg.git
+Vcs-Browser: https://github.com/vectorgrp/sil-kit-adapters-pkg
+Rules-Requires-Root: no
+
+Package: sil-kit-adapter-byte-stream-socket
+Architecture: any
+Depends: libsilkit5, ${misc:Depends}, ${shlibs:Depends}
+Description: Bridge network sockets to the Vector SIL Kit
+ The Vector SIL Kit Adapter for Byte Stream Socket is an open-source
+ tool which allows bridging any socket and transmitting the content
+ between it and a pair of SIL Kit Topics. All data received from the
+ socket will be sent to the publish topic and all data received on
+ the subscribed topic will be sent to the socket. The adapter source
+ and documentation is licensed under a permissible open source license,
+ see LICENSE file. For licenses of third party dependencies, see
+ ThirdParty/LICENSES.rst.

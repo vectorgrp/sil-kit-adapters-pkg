@@ -1,0 +1,5 @@
+sil-kit-adapter-byte-stream-socket (0.9.0-1) UNRELEASED; urgency=low
+
+  * Initial package
+
+ -- Kyllian Aubry <kyllian.aubry@vector.com>  Thu, 04 Dec 2025 10:03:00 +0100

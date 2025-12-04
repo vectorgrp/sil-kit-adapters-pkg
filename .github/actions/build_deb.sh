@@ -23,11 +23,13 @@ elif [[ "$adapter" == "qemu" ]]; then
   adapter_full_name="QEMU"
 elif [[ "$adapter" == "generic-linux-io" ]]; then
   adapter_full_name="Generic Linux IO"
+elif [[ "$adapter" == "byte-stream-socket" ]]; then
+  adapter_full_name="Byte Stream Socket"
 elif [[ "$adapter" == "veipc" ]]; then
   adapter_full_name="veIPC"
 else
   echo "[error] The provided adapter name is invalid."
-  echo "The allowed adapter names are: tap, vcan, qemu, generic-linux-io, veipc"
+  echo "The allowed adapter names are: tap, vcan, qemu, generic-linux-io, byte-stream-socket, veipc"
   exit 1
 fi
 
