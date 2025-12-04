@@ -4,6 +4,9 @@ pkg_dir=$PKG_DIR
 adapter=$ADAPTER_NAME
 tag_name=$TAG_NAME
 
+repo_url=${1:-"https://github.com/vectorgrp/sil-kit-adapters-${adapter}.git"}
+branch=${2:-"v${adapter_version}"}
+
 if [ -z "$adapter" ]; then
   echo "[error] The adapter name is required. You must export ADAPTER_NAME variable before running this script."
   echo "The allowed adapter names are: tap, vcan, qemu, generic-linux-io"
@@ -20,9 +23,11 @@ elif [[ "$adapter" == "qemu" ]]; then
   adapter_full_name="QEMU"
 elif [[ "$adapter" == "generic-linux-io" ]]; then
   adapter_full_name="Generic Linux IO"
+elif [[ "$adapter" == "veipc" ]]; then
+  adapter_full_name="veIPC"
 else
   echo "[error] The provided adapter name is invalid."
-  echo "The allowed adapter names are: tap, vcan, qemu, generic-linux-io"
+  echo "The allowed adapter names are: tap, vcan, qemu, generic-linux-io, veipc"
   exit 1
 fi
 
@@ -53,7 +58,8 @@ fi
 adapter_folder="sil-kit-adapter-${adapter}-${adapter_version}"
 
 echo "[info] Cloning sil-kit-adapters-${adapter} repository"
-git -c http.sslVerify=false clone https://github.com/vectorgrp/sil-kit-adapters-${adapter}.git -b v${adapter_version} --recursive $adapter_folder
+
+git -c http.sslVerify=false clone "${repo_url}" -b "${branch}" --recursive "$adapter_folder"
 ret_val=$?
 if [ "$ret_val" != '0' ] ; then
   echo "[error] Could not clone sil-kit-adapters-${adapter}"

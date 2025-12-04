@@ -39,7 +39,7 @@ The Debian package you are building will be available in an archive as artifact 
 
 ### Building it manually
 You can also build a SIL Kit Adapter package using the `build_deb.sh` script, which you can find in `.github/actions/build_deb.sh`. 
-This script is basically the one called in the Github workflow to build a package.
+This script is basically the one called in the Github workflow to build a package. It also allows you to optionally pass a repository URL and branch as arguments to control which adapter source is packaged.
 Before running this script, you have to define the previous mentionned variables and the path to your
 local sil-kit-adapters-pkg directory using the **PKG_DIR** variable.\
 For example to package the SIL Kit Adapter TAP:
@@ -48,7 +48,7 @@ export PKG_DIR=/path/to/sil-kit-adapters-pkg
 export ADAPTER_NAME=tap
 cd /path/to/sil-kit-adapters-pkg
 mkdir build && cd build
-../.github/actions/build_deb.sh
+../.github/actions/build_deb.sh /url/to/sil-kit-adapters-tap/repository branch_to_package
 ```
 
 The Debian package will be available in the build folder.
