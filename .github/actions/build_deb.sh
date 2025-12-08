@@ -5,7 +5,6 @@ adapter=$ADAPTER_NAME
 tag_name=$TAG_NAME
 
 repo_url=${1:-"https://github.com/vectorgrp/sil-kit-adapters-${adapter}.git"}
-branch=${2:-"v${adapter_version}"}
 
 if [ -z "$adapter" ]; then
   echo "[error] The adapter name is required. You must export ADAPTER_NAME variable before running this script."
@@ -46,6 +45,8 @@ fi
 adapter_full_version=$(sed -En "s/sil-kit-adapter-${adapter} \(([0-9]+\.[0-9]+\.[0-9]+(-preview[0-9]*)?(-RC[0-9]*)?(-[0-9]+))\).*/\1/p;q" ${debian_path}/changelog)
 adapter_version=$(echo $adapter_full_version | sed 's/-[0-9]*$//')
 debian_version=$(echo $adapter_full_version | awk -F'-' '{print $NF}')
+
+branch=${2:-"v${adapter_version}"}
 
 echo "[info] Packaging sil-kit-adapter-${adapter} version $adapter_version"
 echo "[info] Packaging Debian version $debian_version"
