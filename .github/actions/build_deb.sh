@@ -32,7 +32,7 @@ else
   exit 1
 fi
 
-echo "[info] Building the Vector SIL Kit Adapter for $adapter_full_name package"
+echo "[info] Building the SIL Kit Adapter for $adapter_full_name package"
 
 debian_path="${pkg_dir}/sil-kit-adapter-${adapter}/debian"
 

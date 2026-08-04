@@ -1,6 +1,6 @@
-# Contributing to Vector SIL Kit Adapter Packaging
+# Contributing to SIL Kit Adapter Packaging
 
-Welcome and thank you for your interest in contributing to the Vector SIL Kit Adapter Packaging 
+Welcome and thank you for your interest in contributing to the SIL Kit Adapter Packaging 
 open source project.
 
 We are sorry, but at the moment, we do not accept external contributions until

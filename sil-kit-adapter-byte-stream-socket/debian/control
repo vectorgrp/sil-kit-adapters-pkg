@@ -12,8 +12,8 @@ Rules-Requires-Root: no
 Package: sil-kit-adapter-byte-stream-socket
 Architecture: any
 Depends: libsilkit5, ${misc:Depends}, ${shlibs:Depends}
-Description: Bridge network sockets to the Vector SIL Kit
- The Vector SIL Kit Adapter for Byte Stream Socket is an open-source
+Description: Bridge network sockets to the SIL Kit
+ The SIL Kit Adapter for Byte Stream Socket is an open-source
  tool which allows bridging any socket and transmitting the content
  between it and a pair of SIL Kit Topics. All data received from the
  socket will be sent to the publish topic and all data received on

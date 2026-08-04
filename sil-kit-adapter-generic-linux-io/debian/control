@@ -12,8 +12,8 @@ Rules-Requires-Root: no
 Package: sil-kit-adapter-generic-linux-io
 Architecture: any
 Depends: libsilkit5, ${misc:Depends}, ${shlibs:Depends}
-Description: Attach generic Linux IO devices to the Vector SIL Kit
- The Vector SIL Kit Adapter for Generic Linux IO is an open-source
+Description: Attach generic Linux IO devices to the SIL Kit
+ The SIL Kit Adapter for Generic Linux IO is an open-source
  tool which can attach the SIL Kit to generic Linux IO devices such
  as character devices or GPIO chips. The SIL Kit Adapter GLIO source
  and documentation is licensed under a permissible open source license,

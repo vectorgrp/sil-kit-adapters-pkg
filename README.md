@@ -1,9 +1,9 @@
-# The Vector SIL Kit Adapter Packaging
+# The SIL Kit Adapter Packaging
 This sil-kit-adapters-pkg repository allows you to build a Debian package for the following SIL Kit Adapters:
-* The [Vector SIL Kit Adapter for virtual CAN](https://github.com/vectorgrp/sil-kit-adapters-vcan)
-* The [Vector SIL Kit Adapter for QEMU](https://github.com/vectorgrp/sil-kit-adapters-qemu)
-* The [Vector SIL Kit Adapter for TAP devices](https://github.com/vectorgrp/sil-kit-adapters-tap)
-* The [Vector SIL Kit Adapter for Generic Linux IO](https://github.com/vectorgrp/sil-kit-adapters-generic-linux-io)
+* The [SIL Kit Adapter for virtual CAN](https://github.com/vectorgrp/sil-kit-adapters-vcan)
+* The [SIL Kit Adapter for QEMU](https://github.com/vectorgrp/sil-kit-adapters-qemu)
+* The [SIL Kit Adapter for TAP devices](https://github.com/vectorgrp/sil-kit-adapters-tap)
+* The [SIL Kit Adapter for Generic Linux IO](https://github.com/vectorgrp/sil-kit-adapters-generic-linux-io)
 
 To be able to use a SIL Kit Adapter package on your system, you have to install the SIL Kit. 
 This can be done following the instructions given with the [SIL Kit source code](https://github.com/vectorgrp/sil-kit)
