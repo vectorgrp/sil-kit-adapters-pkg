@@ -1,8 +1,26 @@
 #!/usr/bin/make -f
 export DH_VERBOSE = 1
+include /usr/share/dpkg/architecture.mk
+
+# SILKIT_ROOT is mandatory: a directory where both .deb files were extracted
+SILKIT_LIB_DIR := $(SILKIT_ROOT)/usr/lib/$(DEB_HOST_MULTIARCH)
+SILKIT_CMAKE_DIR := $(SILKIT_LIB_DIR)/cmake/SilKit
+SILKIT_VERSION := $(patsubst libSilKit.so.%,%,$(notdir $(realpath $(SILKIT_LIB_DIR)/libSilKit.so.5)))
 
 %:
 	dh $@ --buildsystem=cmake
 
 override_dh_auto_configure:
-	dh_auto_configure -- -DCMAKE_BUILD_TYPE=Release -DBUILD_LINUX_PACKAGE=ON -DFETCHCONTENT_FULLY_DISCONNECTED=OFF
+	@test -n "$(SILKIT_ROOT)" || \
+	  { echo "error: SILKIT_ROOT is not set (see README)" >&2; exit 1; }
+	@test -f $(SILKIT_CMAKE_DIR)/SilKitConfig.cmake -a -n "$(SILKIT_VERSION)" || \
+	  { echo "error: libsilkit5 and libsilkit-dev not found in SILKIT_ROOT=$(SILKIT_ROOT) (see README)" >&2; exit 1; }
+	dh_auto_configure -- -DCMAKE_BUILD_TYPE=Release -DBUILD_LINUX_PACKAGE=ON \
+	  -DFETCHCONTENT_FULLY_DISCONNECTED=ON -DSILKIT_PACKAGE_DIR=$(SILKIT_CMAKE_DIR)
+
+# The extracted libSilKit.so.5 belongs to no installed package, so tell
+# dpkg-shlibdeps where it is and which package provides it at runtime.
+override_dh_shlibdeps:
+	echo "libSilKit 5 libsilkit5 (>= $(SILKIT_VERSION))" > debian/shlibs.local
+	dh_shlibdeps -l$(SILKIT_LIB_DIR)
+	rm -f debian/shlibs.local

@@ -17,10 +17,20 @@ To build a SIL Kit Adapter package, you will need to install the following packa
 sudo apt install debhelper build-essential dh-cmake devscripts dh-make
 ```
 
+The SIL Kit Adapter packages are built against the `libsilkit<major_version>` and `libsilkit-dev` packages, which you can download
+from the [SIL Kit releases](https://github.com/vectorgrp/sil-kit/releases) (both must have the same version).
+They do not need to be installed: extract both into a directory and export it as **SILKIT_ROOT** (mandatory):
+```
+dpkg-deb -x libsilkit<major_version>_<version>_<architecture>.deb /path/to/silkit-root
+dpkg-deb -x libsilkit-dev_<version>_<architecture>.deb /path/to/silkit-root
+export SILKIT_ROOT=/path/to/silkit-root
+```
+
 ## Building a SIL Kit Adapter package
 The build environment uses the following variables:
 * **ADAPTER_NAME**: The name of the adapter you want to package: `tap, vcan, qemu, generic-linux-io`
 * **TAG_NAME**: ***(optional)*** A tag of the adapter if you want to package a specific version.
+* **SILKIT_ROOT**: The directory where the SIL Kit packages were extracted (see Prerequisites).
 
 ### Building using the Github CI
 To use the provided Github Action, you first have to fork the sil-kit-adapters-pkg repository. 
@@ -46,9 +56,10 @@ For example to package the SIL Kit Adapter TAP:
 ```
 export PKG_DIR=/path/to/sil-kit-adapters-pkg
 export ADAPTER_NAME=tap
+export SILKIT_ROOT=/path/to/silkit-root
 cd /path/to/sil-kit-adapters-pkg
 mkdir build && cd build
-../.github/actions/build_deb.sh /url/to/sil-kit-adapters-tap/repository branch_to_package
+../.github/actions/build_deb.sh
 ```
 
 The Debian package will be available in the build folder.

@@ -20,6 +20,10 @@ on:
         required: false
         default: 'amd64'
         type: string
+      silkit_version:
+        description: 'Version of the SIL Kit release whose libsilkit<version> and libsilkit-dev packages are extracted to build the adapter.'
+        required: true
+        type: string
 
 jobs:
   build-debian-package:
@@ -40,6 +44,7 @@ jobs:
         run: |
           apt-get update && \
           apt-get install --no-install-recommends --no-install-suggests -y \
+            ca-certificates \
             cmake \
             wget \
             git \
@@ -55,12 +60,25 @@ jobs:
           apt-get clean
         shell: bash
 
+      - name: Extract SIL Kit packages
+        env:
+          SILKIT_VERSION: ${{ inputs.silkit_version }}
+          DEBIAN_ARCH: ${{ inputs.debian_arch }}
+        run: |
+          base_url="https://github.com/vectorgrp/sil-kit/releases/download/v${SILKIT_VERSION}"
+          for pkg in libsilkit5 libsilkit-dev; do
+            wget -q "${base_url}/${pkg}_${SILKIT_VERSION}-1ubuntu1_${DEBIAN_ARCH}.deb" -P /tmp/silkit
+            dpkg-deb -x "/tmp/silkit/${pkg}_${SILKIT_VERSION}-1ubuntu1_${DEBIAN_ARCH}.deb" /tmp/silkit/root
+          done
+        shell: bash
+
       - name: Build
         id: build
         env:
           PKG_DIR: "./sil-kit-adapters-pkg"
           ADAPTER_NAME: ${{ inputs.adapter_name }}
           TAG_NAME: ${{ inputs.tag_name }}
+          SILKIT_ROOT: "/tmp/silkit/root"
           CI_RUN: "1"
         uses: ./sil-kit-adapters-pkg/.github/actions
 

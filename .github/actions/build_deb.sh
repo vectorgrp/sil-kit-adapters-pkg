@@ -80,10 +80,10 @@ cp -r $debian_path $adapter_folder
 cd $adapter_folder
 
 echo "[info] Running debuild"
-debuild -us -uc --lintian-opts -E --pedantic
+debuild --preserve-envvar=SILKIT_ROOT -us -uc --lintian-opts -E --pedantic
 ret_val=$?
 if [ "$ret_val" != '0' ] ; then
-  echo "[error] \"debuild -us -uc --lintian-opts -E --pedantic\" exit code $ret_val"
+  echo "[error] \"debuild --preserve-envvar=SILKIT_ROOT -us -uc --lintian-opts -E --pedantic\" exit code $ret_val"
   exit 1
 fi
 
